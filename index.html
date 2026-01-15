@@ -1,0 +1,2870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lalibela Books - Ethiopian Online Bookstore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abyssinica+SIL&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #8B4513; /* Brown color */
+            --secondary-color: #D2691E;
+            --dark-color: #5D2906;
+            --light-color: #F5DEB3;
+            --text-color: #333;
+            --text-light: #666;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Abyssinica SIL', serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--dark-color);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        /* Main Content (Initially visible) */
+        #main-content {
+            display: block;
+        }
+
+        /* Login Page (Initially hidden) */
+        #login-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #FAF0E6 0%, #F5EBDC 100%);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        /* Login Page Specific Styles */
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            min-height: 600px;
+        }
+        
+        .login-left {
+            flex: 1;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-left h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .login-left p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .login-features {
+            margin-top: 40px;
+        }
+        
+        .login-feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .login-feature i {
+            font-size: 1.5rem;
+            color: var(--light-color);
+        }
+        
+        .login-right {
+            flex: 1;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .login-header h2 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .login-header p {
+            color: var(--text-light);
+        }
+        
+        .auth-form {
+            width: 100%;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .remember-me input {
+            width: auto;
+        }
+        
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-light);
+        }
+        
+        .auth-switch a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .back-to-home a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .back-to-home a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hide register form by default */
+        #register-form {
+            display: none;
+        }
+
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 i {
+            color: var(--primary-color);
+        }
+
+        .logo p {
+            font-size: 0.9rem;
+            color: var(--dark-color);
+            margin-bottom: 0;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .cart-icon, .user-menu {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-menu {
+            position: relative;
+        }
+
+        .user-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            box-shadow: var(--shadow);
+            border-radius: var(--border-radius);
+            min-width: 150px;
+            display: none;
+            z-index: 101;
+        }
+
+        .user-dropdown a {
+            display: block;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: var(--text-color);
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .user-dropdown a:last-child {
+            border-bottom: none;
+        }
+
+        .user-dropdown a:hover {
+            background-color: #f9f9f9;
+            color: var(--primary-color);
+        }
+
+        .user-menu:hover .user-dropdown {
+            display: block;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #FAF0E6 0%, #F5EBDC 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--text-light);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary, .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 25px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 2px solid var(--dark-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--dark-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+            max-width: 500px;
+        }
+
+        .ethiopian-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M20,50 Q50,10 80,50 Q50,90 20,50" fill="none" stroke="%238B4513" stroke-width="2" opacity="0.1"/><circle cx="50" cy="50" r="10" fill="%23D2691E" opacity="0.1"/></svg>');
+            background-size: 200px;
+            z-index: 1;
+        }
+
+        .hero-img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Sections Common */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .book-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .book-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .book-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .book-card:hover .book-image img {
+            transform: scale(1.05);
+        }
+
+        .book-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .book-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            line-height: 1.3;
+            height: 2.6em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .book-author {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .book-description {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            flex-grow: 1;
+            line-height: 1.4;
+            height: 4.2em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        .book-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-family: 'Abyssinica SIL', serif;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-add-to-cart, .btn-view-details {
+            flex: 1;
+            padding: 10px;
+            border-radius: var(--border-radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .btn-add-to-cart {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: #4a1f04;
+        }
+
+        .btn-view-details {
+            background-color: transparent;
+            color: var(--dark-color);
+            border: 1px solid var(--dark-color);
+        }
+
+        .btn-view-details:hover {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        /* Categories */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .category-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .category-card:hover, .category-card.active {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            background-color: #f9f5f0;
+        }
+
+        .category-card.active {
+            border: 2px solid var(--primary-color);
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .category-card h3 {
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        /* Cart */
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-overlay.active {
+            right: 0;
+        }
+
+        .cart-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-img {
+            width: 80px;
+            height: 100px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .cart-item-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .quantity {
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .remove-item {
+            color: var(--primary-color);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .empty-cart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-light);
+        }
+
+        .empty-cart i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        #cart-total {
+            color: var(--primary-color);
+        }
+
+        .btn-checkout {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-checkout:hover {
+            background-color: var(--dark-color);
+        }
+
+        /* Payment Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow);
+        }
+
+        .wide-modal {
+            max-width: 800px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        /* Orders History */
+        .orders-container {
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .order-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .order-header {
+            background-color: #f9f5f0;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-id {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .order-date {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .order-status {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #FFF3CD;
+            color: #856404;
+        }
+
+        .status-processing {
+            background-color: #D1ECF1;
+            color: #0C5460;
+        }
+
+        .status-delivered {
+            background-color: #D4EDDA;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background-color: #F8D7DA;
+            color: #721C24;
+        }
+
+        .order-body {
+            padding: 20px;
+        }
+
+        .order-items {
+            margin-bottom: 15px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-img {
+            width: 60px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+
+        .order-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .order-item-details {
+            flex: 1;
+        }
+
+        .order-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .order-item-price {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .order-summary-details {
+            background-color: #f9f5f0;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin-top: 15px;
+        }
+
+        .order-summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .order-summary-row.total {
+            font-weight: 700;
+            color: var(--primary-color);
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .empty-orders {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+
+        .empty-orders i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .empty-orders h4 {
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+
+        .empty-orders p {
+            margin-bottom: 20px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 4000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            background-color: #155724;
+        }
+
+        .notification.error {
+            background-color: #721C24;
+        }
+
+        /* Visit Section */
+        .visit-section {
+            background-color: #FAF0E6;
+            padding: 60px 0;
+        }
+
+        .visit-section .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .visit-content {
+            flex: 1;
+        }
+
+        .visit-content h2 {
+            margin-bottom: 25px;
+        }
+
+        .visit-content p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .visit-content i {
+            color: var(--primary-color);
+            margin-top: 3px;
+        }
+
+        .visit-image {
+            flex: 1;
+            height: 300px;
+            position: relative;
+            border-radius: var(--border-radius);
+            background-color: var(--dark-color);
+            overflow: hidden;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #f9f5f0;
+            padding: 80px 0;
+        }
+
+        .contact-section * {
+            font-family: 'Open Sans', sans-serif !important;
+        }
+
+        .contact-section h1,
+        .contact-section h2,
+        .contact-section h3,
+        .contact-section h4 {
+            font-family: 'Abyssinica SIL', serif !important;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .contact-info h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .contact-info h3 i {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--dark-color);
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        footer * {
+            font-family: 'Open Sans', sans-serif !important;
+        }
+
+        footer h1,
+        footer h2,
+        footer h3,
+        footer h4 {
+            font-family: 'Abyssinica SIL', serif !important;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo h3 {
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--light-color);
+        }
+
+        .footer-payment h4 {
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .payment-method {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .currency-note {
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero .container {
+                flex-direction: column;
+            }
+            
+            .hero-content, .hero-image {
+                max-width: 100%;
+            }
+            
+            .visit-section .container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 999;
+                align-items: flex-start;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .user-dropdown {
+                position: static;
+                box-shadow: none;
+                display: none;
+                width: 100%;
+            }
+            
+            .user-menu:hover .user-dropdown,
+            .user-menu.active .user-dropdown {
+                display: block;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .login-container {
+                flex-direction: column;
+                max-width: 500px;
+                margin: 20px;
+            }
+            
+            .login-left {
+                padding: 40px 20px;
+            }
+            
+            .login-right {
+                padding: 40px 20px;
+            }
+            
+            .login-left h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Header & Navigation -->
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <h1><i class="fas fa-book-open"></i> Lalibela Books</h1>
+                    <p>Ethiopian Online Bookstore</p>
+                </div>
+                <nav>
+                    <ul class="nav-menu">
+                       <li><a href="#" class="active" onclick="showSection('home', event)"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="#" onclick="showSection('books', event)"><i class="fas fa-book"></i> Books</a></li>
+<li><a href="#" onclick="showSection('categories', event)"><i class="fas fa-list"></i> Categories</a></li>
+<li><a href="#" onclick="showSection('contact', event)"><i class="fas fa-envelope"></i> Contact</a></li>
+                        <li class="user-menu" id="user-menu">
+                            <a href="#" id="user-toggle">
+                                <i class="fas fa-user"></i>
+                                <span id="user-name">Account</span>
+                            </a>
+                            <div class="user-dropdown" id="user-dropdown">
+                                <a href="#" id="login-link">Login</a>
+                                <a href="#" id="register-link">Register</a>
+                                <a href="#" id="orders-link" style="display:none;">My Orders</a>
+                                <a href="#" id="logout-link" style="display:none;">Logout</a>
+                            </div>
+                        </li>
+                        <li class="cart-icon">
+                            <a href="#" id="cart-toggle">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="hamburger" id="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="hero" id="home-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Discover Ethiopia's Literary Heritage</h2>
+                    <p>From ancient Geʽez manuscripts and historical works to compelling fiction and contemporary African literature, explore our carefully curated collection at Lalibela Books in the heart of Dire Dawa</p>
+                    <div class="hero-buttons">
+                        <a href="#" onclick="showSection('books')" class="btn-primary">Explore Collection <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" onclick="showSection('visit')" class="btn-secondary">Visit Our Store <i class="fas fa-store"></i></a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="ethiopian-pattern"></div>
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Ethiopian books and artifacts" class="hero-img">
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Books Section -->
+        <section class="featured-books" id="books-section">
+            <div class="container">
+                <h2 class="section-title">Featured Books</h2>
+                <div class="books-grid" id="books-grid">
+                    <!-- Books will be loaded by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="categories" id="categories-section">
+            <div class="container">
+                <h2 class="section-title">Book Categories</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="all">
+                        <div class="category-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h3>All Books</h3>
+                        <p>Browse our complete collection of books.</p>
+                    </div>
+                    <div class="category-card" data-category="Ge'ez Manuscripts">
+                        <div class="category-icon">
+                            <i class="fas fa-scroll"></i>
+                        </div>
+                        <h3>Ge'ez Manuscripts</h3>
+                        <p>Ancient religious and historical texts in Ge'ez script.</p>
+                    </div>
+                    <div class="category-card" data-category="Ethiopian Literature">
+                        <div class="category-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h3>Ethiopian Literature</h3>
+                        <p>Classic and modern works by Ethiopian authors.</p>
+                    </div>
+                    <div class="category-card" data-category="African Studies">
+                        <div class="category-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h3>African Studies</h3>
+                        <p>Books on African history, culture, and politics.</p>
+                    </div>
+                    <div class="category-card" data-category="Amharic Language">
+                        <div class="category-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3>Amharic Language</h3>
+                        <p>Learn Amharic with our language books and dictionaries.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <div class="cart-overlay" id="cart-overlay">
+            <div class="cart-container">
+                <div class="cart-header">
+                    <h3><i class="fas fa-shopping-cart"></i> Your Shopping Cart</h3>
+                    <button class="close-cart" id="close-cart">&times;</button>
+                </div>
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be loaded by JavaScript -->
+                    <div class="empty-cart" id="empty-cart">
+                        <i class="fas fa-shopping-basket"></i>
+                        <p>Your cart is empty</p>
+                    </div>
+                </div>
+                <div class="cart-footer">
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span id="cart-total">0 Birr</span>
+                    </div>
+                    <button class="btn-checkout" id="checkout-btn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Modal -->
+        <div class="modal-overlay" id="payment-modal">
+            <div class="modal-container">
+                <div class="modal-header">
+                    <h3>Complete Your Purchase</h3>
+                    <button class="close-modal" id="close-payment">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="order-summary" id="order-summary">
+                        <!-- Order summary will be loaded here -->
+                    </div>
+                    
+                    <form id="payment-form">
+                        <h4>Select Payment Method</h4>
+                        <div class="payment-methods-selection">
+                            <div class="payment-option">
+                                <input type="radio" id="payment-cbe" name="payment" value="cbe" checked>
+                                <label for="payment-cbe">
+                                    <i class="fas fa-university"></i>
+                                    <span>Commercial Bank of Ethiopia</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="payment-telebirr" name="payment" value="telebirr">
+                                <label for="payment-telebirr">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>Telebirr</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="payment-cash" name="payment" value="cash">
+                                <label for="payment-cash">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                    <span>Cash on Delivery</span>
+                                </label>
+                            </div>
+                            <div class="payment-option">
+                                <input type="radio" id="payment-other" name="payment" value="other">
+                                <label for="payment-other">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span>Other Bank Transfer</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div id="payment-details" style="display:none;">
+                            <div class="form-group">
+                                <input type="text" id="account-number" placeholder="Account Number / Phone">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="transaction-id" placeholder="Transaction ID (if any)">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="delivery-notes" placeholder="Delivery Notes (optional)" rows="3"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" id="confirm-payment">
+                            <i class="fas fa-lock"></i> Confirm Payment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Orders History Modal -->
+        <div class="modal-overlay" id="orders-modal">
+            <div class="modal-container wide-modal">
+                <div class="modal-header">
+                    <h3><i class="fas fa-history"></i> My Order History</h3>
+                    <button class="close-modal" id="close-orders">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="orders-container" id="orders-container">
+                        <!-- Orders will be loaded here -->
+                        <div class="empty-orders" id="empty-orders">
+                            <i class="fas fa-box-open"></i>
+                            <h4>No Orders Yet</h4>
+                            <p>You haven't placed any orders yet. Start shopping to see your order history here.</p>
+                            <button class="btn-primary" onclick="showSection('books')">Browse Books</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visit Section -->
+        <section class="visit-section" id="visit-section">
+            <div class="container">
+                <div class="visit-content">
+                    <h2>Visit Our Store in Dire Dawa</h2>
+                    <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Lalibela Books, Connel, Dire Dawa, Ethiopia</p>
+                    <p><i class="fas fa-clock"></i> <strong>Hours:</strong> Monday - Friday: 9:00 AM - 8:00 PM, Saturday: 10:00 AM - 6:00 PM</p>
+                    <p><i class="fas fa-phone"></i> <strong>Phone:</strong> +251 11 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> info@lalibelabooks.et</p>
+                </div>
+               <div class="visit-image">
+    <img src="image/bookstore.jpg" alt="Bookstore" />
+</div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-content">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="contact-info">
+                        <h3><i class="fas fa-info-circle"></i> About Lalibela Books</h3>
+                        <p>Lalibela Books is dedicated to preserving and promoting Ethiopia's rich literary heritage. We offer a wide selection of books in English and Amharic, from ancient manuscripts to contemporary works.</p>
+                        <p>We ship books across Ethiopia and accept payments in Ethiopian Birr only.</p>
+                         <p>📍 Conel, Dire Dawa</p>
+                         
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-logo">
+                        <h3><i class="fas fa-book-open"></i> Lalibela Books</h3>
+                        <p>Ethiopian Online Bookstore</p>
+                    </div>
+                    <div class="footer-links">
+                        <h4>Quick Links</h4>
+                        <ul>
+                            <li><a href="#" onclick="showSection('home')">Home</a></li>
+                            <li><a href="#" onclick="showSection('books')">Books</a></li>
+                            <li><a href="#" onclick="showSection('categories')">Categories</a></li>
+                            <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-payment">
+                        <h4>Payment Methods</h4>
+                        <div class="payment-methods">
+                            <span class="payment-method">CBE</span>
+                            <span class="payment-method">Telebirr</span>
+                            <span class="payment-method">Cash</span>
+                            <span class="payment-method">Bank Transfer</span>
+                        </div>
+                        <p class="currency-note">All prices are in Ethiopian Birr (ETB)</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 Lalibela Books. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Page (Initially hidden) -->
+    <div id="login-page">
+        <div class="login-page">
+            <div class="login-container">
+                <!-- Left Side: Welcome Message -->
+                <div class="login-left">
+                    <h1><i class="fas fa-book-open"></i> Lalibela Books</h1>
+                    <p>Welcome back to Ethiopia's premier online bookstore. Access your account to continue your literary journey.</p>
+                    
+                    <div class="login-features">
+                        <div class="login-feature">
+                            <i class="fas fa-shopping-cart"></i>
+                            <div>
+                                <h4>Track Your Orders</h4>
+                                <p>View your complete order history and track shipments</p>
+                            </div>
+                        </div>
+                        <div class="login-feature">
+                            <i class="fas fa-heart"></i>
+                            <div>
+                                <h4>Save Favorite Books</h4>
+                                <p>Create wishlists and save books for later</p>
+                            </div>
+                        </div>
+                        <div class="login-feature">
+                            <i class="fas fa-shipping-fast"></i>
+                            <div>
+                                <h4>Fast Delivery</h4>
+                                <p>Get books delivered across Ethiopia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Side: Login/Register Forms -->
+                <div class="login-right">
+                    <div class="login-header">
+                        <h2 id="form-title">Welcome Back</h2>
+                        <p id="form-subtitle">Sign in to your account to continue</p>
+                    </div>
+                    
+                    <!-- Login Form -->
+                    <form id="login-form-main" class="auth-form">
+                        <div class="form-group">
+                            <label for="login-email-main">Email Address</label>
+                            <input type="email" id="login-email-main" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="login-password-main">Password</label>
+                            <input type="password" id="login-password-main" placeholder="Enter your password" required>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember-me">
+                                <label for="remember-me">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot Password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </button>
+                    </form>
+                    
+                    <!-- Register Form -->
+                    <form id="register-form-main" class="auth-form">
+                        <div class="form-group">
+                            <label for="register-name-main">Full Name</label>
+                            <input type="text" id="register-name-main" placeholder="Enter your full name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-email-main">Email Address</label>
+                            <input type="email" id="register-email-main" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-password-main">Password</label>
+                            <input type="password" id="register-password-main" placeholder="Create a password (min. 6 characters)" required minlength="6">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-phone-main">Phone Number</label>
+                            <input type="tel" id="register-phone-main" placeholder="Enter your phone number" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="register-address-main">Shipping Address</label>
+                            <input type="text" id="register-address-main" placeholder="Enter your shipping address" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 1.1rem;">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+                    
+                    <div class="auth-switch">
+                        <p id="switch-text">Don't have an account? <a href="#" id="switch-to-register-main">Create one here</a></p>
+                    </div>
+                    
+                    <div class="back-to-home">
+                        <a href="#" id="back-to-home">
+                            <i class="fas fa-arrow-left"></i> Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      const books = [
+    {
+        id: 1,
+        title: "The Ethiopians: Lost Civilizations",
+        author: "Steven Kaplan",
+        description: "Richly illustrated and up‑to‑date exploration of Ethiopia’s history.",
+        price: 450,
+        category: "Ge'ez Manuscripts",
+        image: "image/cccc.jpg" 
+        // Ethiopian Orthodox church interior
+    },
+    {
+        id: 2,
+        title: "Lela Sew(ሌላ ሰው)",
+        author: "Dr. Mehret Debebe",
+        description: "A psychological Amharic novel that explores personality and identity.",
+        price: 320,
+        category: "Ethiopian Literature",
+        image: "image/book11.jpg"
+        // Ethiopian man reading / literature vibe
+    },
+    {
+        id: 3,
+        title: "Dertogada (ዴርቶጋዳ)",
+        author: "Yismake Worku",
+        description: "A dynamic Amharic novel blending suspense, science‑fiction, romance, and social commentary.",
+        price: 580,
+       
+        image: "image/mm.webp"
+        // African historical ruins
+    },
+    {
+        id: 4,
+        title: "Zgora(ዝጎራ)",
+        author: "Alemayehu Wase",
+        description: "a science‑fiction novel that follows an ecologist’s mysterious research.",
+        price: 275,
+        category: "Amharic Language",
+        image: "image/copy.jpg"
+        // Language learning / writing
+    },
+    {
+        id: 5,
+        title: "Emegua(እመጓ)",
+        author: "Dr. Alemayehu Wasse",
+        description: "Ethiopian novel that weaves a compelling tale of spiritual quest and ancient mystery.",
+        price: 620,
+        category: "Ethiopian Literature",
+        image: "image/book6.jpg"
+        // Historical documents / royal journal
+    },
+    {
+        id: 6,
+        title: "Tizita (ትዝታ)",
+        author: "Haddis Alemayehue",
+        description: "captures the author’s recollections and reflections on life and history.",
+        price: 890,
+        category: "Ge'ez Manuscripts",
+        image: "image/book5.jpg"
+        // Ancient manuscript parchment
+    },
+    {
+        id: 7,
+        title: "A History of Modern Ethiopia",
+        author: "Bahru Zewde",
+        description: "Detailed account of Ethiopia's history from 1855 to 1991.",
+        price: 520,
+        category: "Ethiopian History",
+        image: "image/ehyiopia.jpg"
+        // Ethiopian landscape / historical context
+    },
+    {
+        id: 8,
+        title: "Fikir Eske Mekabir",
+        author: "Haddis Alemayehu",
+        description: "Aa classic Ethiopian love story about deep devotion.",
+        price: 380,
+        category: "Ethiopian Cuisine",
+        image: "image/book4.jpg"
+        // Injera and Ethiopian food
+    },
+    {
+        id: 9,
+        title: "Altezewawerechm",
+        author: "Alex Abreham",
+        description: "its compelling work of fiction that explores human nature.",
+        price: 410,
+        category: "Ethiopian History",
+        image:"image/book2.jpg"
+    },
+    {
+        id: 10,
+        title: "Ke Amen Bashager",
+        author: "Bewketu Seyoum",
+        description: "a vibrant collection of essays and reflections blending travel, politics, history.",
+        price: 650,
+        category: "Amharic Language",
+        image: "image/book1.jpg"
+        // Dictionary / language reference
+    },
+    {
+        id: 11,
+        title: "African Philosophy: An Anthology",
+        author: "Kwasi Wiredu",
+        description: "Collection of key texts in African philosophical thought.",
+        price: 490,
+        category: "African Studies",
+        image: "image/bbbb.jpg"
+        // Philosophy books / academia
+    },
+
+];
+
+
+
+        // User Management
+        class UserManager {
+            constructor() {
+                this.currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+                this.users = JSON.parse(localStorage.getItem('users')) || [];
+                this.orders = JSON.parse(localStorage.getItem('orders')) || [];
+                this.initializeAdmin();
+            }
+            
+            initializeAdmin() {
+                const adminExists = this.users.some(user => user.email === 'admin@lalibela.com');
+                if (!adminExists) {
+                    const adminUser = {
+                        id: 'admin001',
+                        name: 'Administrator',
+                        email: 'admin@lalibela.com',
+                        password: 'admin123',
+                        phone: '+251911000000',
+                        address: 'Lalibela Books, Dire Dawa',
+                        role: 'admin',
+                        createdAt: new Date().toISOString()
+                    };
+                    this.users.push(adminUser);
+                    localStorage.setItem('users', JSON.stringify(this.users));
+                }
+            }
+            
+            register(name, email, password, phone, address) {
+                if (this.users.some(user => user.email === email)) {
+                    return { success: false, message: 'Email already registered' };
+                }
+                
+                const newUser = {
+                    id: 'user' + Date.now(),
+                    name,
+                    email,
+                    password,
+                    phone,
+                    address,
+                    role: 'customer',
+                    createdAt: new Date().toISOString()
+                };
+                
+                this.users.push(newUser);
+                localStorage.setItem('users', JSON.stringify(this.users));
+                
+                return { success: true, user: newUser };
+            }
+            
+            login(email, password) {
+                const user = this.users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    this.currentUser = {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        role: user.role
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+                    return { success: true, user: this.currentUser };
+                }
+                
+                return { success: false, message: 'Invalid email or password' };
+            }
+            
+            logout() {
+                this.currentUser = null;
+                localStorage.removeItem('currentUser');
+            }
+            
+            isLoggedIn() {
+                return this.currentUser !== null;
+            }
+            
+            createOrder(cart, paymentMethod, deliveryNotes = '') {
+                if (!this.isLoggedIn()) {
+                    return { success: false, message: 'Please login to place an order' };
+                }
+                
+                if (cart.length === 0) {
+                    return { success: false, message: 'Cart is empty' };
+                }
+                
+                const statuses = ['pending', 'processing', 'delivered'];
+                const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                const order = {
+                    id: 'ORD' + Date.now(),
+                    userId: this.currentUser.id,
+                    userName: this.currentUser.name,
+                    userEmail: this.currentUser.email,
+                    items: cart.map(item => ({
+                        id: item.id,
+                        title: item.title,
+                        price: item.price,
+                        quantity: item.quantity,
+                        image: item.image
+                    })),
+                    total: cart.reduce((total, item) => total + (item.price * item.quantity), 0),
+                    paymentMethod,
+                    deliveryNotes,
+                    status: randomStatus,
+                    createdAt: new Date().toISOString(),
+                    orderNumber: Math.floor(100000 + Math.random() * 900000)
+                };
+                
+                this.orders.push(order);
+                localStorage.setItem('orders', JSON.stringify(this.orders));
+                
+                return { success: true, order };
+            }
+            
+            getUserOrders(userId) {
+                return this.orders
+                    .filter(order => order.userId === userId)
+                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            }
+            
+            getOrderStatusClass(status) {
+                const statusClasses = {
+                    'pending': 'status-pending',
+                    'processing': 'status-processing',
+                    'delivered': 'status-delivered',
+                    'cancelled': 'status-cancelled'
+                };
+                return statusClasses[status] || 'status-pending';
+            }
+            
+            getPaymentMethodName(method) {
+                const paymentNames = {
+                    'cbe': 'Commercial Bank of Ethiopia',
+                    'telebirr': 'Telebirr',
+                    'cash': 'Cash on Delivery',
+                    'other': 'Bank Transfer'
+                };
+                return paymentNames[method] || method;
+            }
+        }
+
+        const userManager = new UserManager();
+        let cart = JSON.parse(localStorage.getItem(`cart_${userManager.currentUser?.id || 'guest'}`)) || [];
+        let currentCategory = 'all';
+
+        // DOM Elements
+        const mainContent = document.getElementById('main-content');
+        const loginPage = document.getElementById('login-page');
+        const booksGrid = document.getElementById('books-grid');
+        const cartToggle = document.getElementById('cart-toggle');
+        const cartOverlay = document.getElementById('cart-overlay');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCount = document.querySelector('.cart-count');
+        const emptyCart = document.getElementById('empty-cart');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const userToggle = document.getElementById('user-toggle');
+        const userDropdown = document.getElementById('user-dropdown');
+        const userName = document.getElementById('user-name');
+        const loginLink = document.getElementById('login-link');
+        const registerLink = document.getElementById('register-link');
+        const ordersLink = document.getElementById('orders-link');
+        const logoutLink = document.getElementById('logout-link');
+        const paymentModal = document.getElementById('payment-modal');
+        const closePayment = document.getElementById('close-payment');
+        const paymentForm = document.getElementById('payment-form');
+        const orderSummary = document.getElementById('order-summary');
+        const ordersModal = document.getElementById('orders-modal');
+        const closeOrders = document.getElementById('close-orders');
+        const ordersContainer = document.getElementById('orders-container');
+        const emptyOrders = document.getElementById('empty-orders');
+        const backToHome = document.getElementById('back-to-home');
+        const loginFormMain = document.getElementById('login-form-main');
+        const registerFormMain = document.getElementById('register-form-main');
+        const switchToRegisterMain = document.getElementById('switch-to-register-main');
+        const formTitle = document.getElementById('form-title');
+        const formSubtitle = document.getElementById('form-subtitle');
+        const switchText = document.getElementById('switch-text');
+        const categoryCards = document.querySelectorAll('.category-card');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderBooks();
+            updateCartUI();
+            updateUserUI();
+            setupEventListeners();
+            setupLoginPageListeners();
+            setupCategoryInteractions();
+            
+            // Show all sections by default (no hiding)
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.display = 'block';
+            });
+        });
+
+        // Show/Hide sections - FIXED VERSION
+function showSection(section, event) {
+    // Prevent default behavior if event is passed
+    if (event) {
+        event.preventDefault();
+    }
+    
+    // Scroll to the section instead of hiding others
+    const targetSection = document.getElementById(`${section}-section`);
+    if (targetSection) {
+        window.scrollTo({
+            top: targetSection.offsetTop - 80,
+            behavior: 'smooth'
+        });
+    }
+    
+    // Update active nav link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    // Add active class to clicked link
+    if (event && event.target) {
+        event.target.classList.add('active');
+    }
+    
+    // Close mobile menu
+    navMenu.classList.remove('active');
+}
+
+        // Show login page
+        function showLoginPage(isRegister = false) {
+            mainContent.style.display = 'none';
+            loginPage.style.display = 'block';
+            
+            if (isRegister) {
+                // Show register form
+                loginFormMain.style.display = 'none';
+                registerFormMain.style.display = 'block';
+                formTitle.textContent = 'Create Account';
+                formSubtitle.textContent = 'Join Lalibela Books today';
+                switchText.innerHTML = 'Already have an account? <a href="#" id="switch-to-login-main">Sign in here</a>';
+            } else {
+                // Show login form
+                loginFormMain.style.display = 'block';
+                registerFormMain.style.display = 'none';
+                formTitle.textContent = 'Welcome Back';
+                formSubtitle.textContent = 'Sign in to your account to continue';
+                switchText.innerHTML = 'Don\'t have an account? <a href="#" id="switch-to-register-main">Create one here</a>';
+            }
+            
+            // Close dropdown if open
+            userDropdown.style.display = 'none';
+        }
+
+        // Show main content (hide login page)
+        function showMainContent() {
+            loginPage.style.display = 'none';
+            mainContent.style.display = 'block';
+            updateUserUI();
+        }
+
+        // Setup login page event listeners
+        function setupLoginPageListeners() {
+            // Back to home button
+            backToHome.addEventListener('click', function(e) {
+                e.preventDefault();
+                showMainContent();
+            });
+
+            // Switch between login/register forms
+            switchToRegisterMain.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (loginFormMain.style.display !== 'none') {
+                    // Switch to register form
+                    loginFormMain.style.display = 'none';
+                    registerFormMain.style.display = 'block';
+                    formTitle.textContent = 'Create Account';
+                    formSubtitle.textContent = 'Join Lalibela Books today';
+                    switchText.innerHTML = 'Already have an account? <a href="#" id="switch-to-login-main">Sign in here</a>';
+                    
+                    // Add event listener for switch back
+                    const switchToLoginMain = document.getElementById('switch-to-login-main');
+                    if (switchToLoginMain) {
+                        switchToLoginMain.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            loginFormMain.style.display = 'block';
+                            registerFormMain.style.display = 'none';
+                            formTitle.textContent = 'Welcome Back';
+                            formSubtitle.textContent = 'Sign in to your account to continue';
+                            switchText.innerHTML = 'Don\'t have an account? <a href="#" id="switch-to-register-main">Create one here</a>';
+                        });
+                    }
+                }
+            });
+
+            // Login form submission
+            loginFormMain.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email-main').value;
+                const password = document.getElementById('login-password-main').value;
+                
+                const result = userManager.login(email, password);
+                
+                if (result.success) {
+                    showNotification(`Welcome back, ${result.user.name}!`, 'success');
+                    loadUserCart();
+                    showMainContent();
+                    loginFormMain.reset();
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+
+            // Register form submission
+            registerFormMain.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('register-name-main').value;
+                const email = document.getElementById('register-email-main').value;
+                const password = document.getElementById('register-password-main').value;
+                const phone = document.getElementById('register-phone-main').value;
+                const address = document.getElementById('register-address-main').value;
+                
+                const result = userManager.register(name, email, password, phone, address);
+                
+                if (result.success) {
+                    showNotification('Account created successfully!', 'success');
+                    
+                    // Auto-login after registration
+                    setTimeout(() => {
+                        const loginResult = userManager.login(email, password);
+                        if (loginResult.success) {
+                            loadUserCart();
+                            showMainContent();
+                            registerFormMain.reset();
+                        }
+                    }, 500);
+                } else {
+                    showNotification(result.message, 'error');
+                }
+            });
+        }
+
+        // Setup category interactions
+        function setupCategoryInteractions() {
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove active class from all category cards
+                    categoryCards.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to clicked category card
+                    this.classList.add('active');
+                    
+                    // Filter books by category
+                    const category = this.getAttribute('data-category');
+                    currentCategory = category;
+                    filterBooksByCategory(category);
+                });
+            });
+        }
+
+        // Filter books by category
+        function filterBooksByCategory(category) {
+            let filteredBooks;
+            
+            if (category === 'all') {
+                filteredBooks = books;
+            } else {
+                filteredBooks = books.filter(book => book.category === category);
+            }
+            
+            renderBooksGrid(filteredBooks);
+        }
+
+        // Render books to the grid
+        function renderBooksGrid(booksToShow) {
+            booksGrid.innerHTML = '';
+            
+            booksToShow.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.innerHTML = `
+                    <div class="book-image">
+                        <img src="${book.image}" alt="${book.title}">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">by ${book.author}</p>
+                        <p class="book-description">${book.description}</p>
+                        <div class="book-price">${book.price} Birr</div>
+                        <div class="book-actions">
+                            <button class="btn-add-to-cart" data-id="${book.id}">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button class="btn-view-details" data-id="${book.id}">
+                                <i class="fas fa-info-circle"></i> Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+                booksGrid.appendChild(bookCard);
+            });
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = parseInt(this.getAttribute('data-id'));
+                    addToCart(bookId);
+                });
+            });
+            
+            document.querySelectorAll('.btn-view-details').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = parseInt(this.getAttribute('data-id'));
+                    viewBookDetails(bookId);
+                });
+            });
+        }
+
+        // Update user UI
+        function updateUserUI() {
+            if (userManager.isLoggedIn()) {
+                userName.textContent = userManager.currentUser.name.split(' ')[0];
+                loginLink.style.display = 'none';
+                registerLink.style.display = 'none';
+                ordersLink.style.display = 'block';
+                logoutLink.style.display = 'block';
+            } else {
+                userName.textContent = 'Account';
+                loginLink.style.display = 'block';
+                registerLink.style.display = 'block';
+                ordersLink.style.display = 'none';
+                logoutLink.style.display = 'none';
+            }
+        }
+
+        // Render books to the page
+        function renderBooks() {
+            renderBooksGrid(books);
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Cart toggle
+            cartToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                cartOverlay.classList.add('active');
+            });
+            
+            // Close cart
+            closeCart.addEventListener('click', function() {
+                cartOverlay.classList.remove('active');
+            });
+            
+            // Close cart when clicking outside
+            cartOverlay.addEventListener('click', function(e) {
+                if (e.target === cartOverlay) {
+                    cartOverlay.classList.remove('active');
+                }
+            });
+            
+            // Checkout button
+            checkoutBtn.addEventListener('click', function() {
+                if (cart.length === 0) {
+                    showNotification('Your cart is empty!', 'error');
+                    return;
+                }
+                
+                if (!userManager.isLoggedIn()) {
+                    showNotification('Please login to checkout', 'error');
+                    showLoginPage();
+                    cartOverlay.classList.remove('active');
+                    return;
+                }
+                
+                // Show payment modal
+                showPaymentModal();
+            });
+            
+            // Hamburger menu
+            hamburger.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+            });
+            
+            // User dropdown
+            userToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!userToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                    userDropdown.style.display = 'none';
+                }
+            });
+            
+            // Login link
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginPage(false);
+            });
+            
+            // Register link
+            registerLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showLoginPage(true);
+            });
+            
+            // Logout
+            logoutLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                userManager.logout();
+                updateUserUI();
+                showNotification('Logged out successfully', 'info');
+                userDropdown.style.display = 'none';
+                loadUserCart();
+            });
+            
+            // Orders link
+            ordersLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showOrderHistory();
+                userDropdown.style.display = 'none';
+            });
+            
+            // Orders modal
+            closeOrders.addEventListener('click', function() {
+                ordersModal.classList.remove('active');
+            });
+            
+            ordersModal.addEventListener('click', function(e) {
+                if (e.target === ordersModal) {
+                    ordersModal.classList.remove('active');
+                }
+            });
+            
+            // Contact form
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    showNotification('Thank you for your message! We will get back to you soon.', 'success');
+                    this.reset();
+                });
+            }
+            
+            // Payment modal
+            closePayment.addEventListener('click', function() {
+                paymentModal.classList.remove('active');
+            });
+            
+            paymentModal.addEventListener('click', function(e) {
+                if (e.target === paymentModal) {
+                    paymentModal.classList.remove('active');
+                }
+            });
+            
+            // Payment method selection
+            document.querySelectorAll('input[name="payment"]').forEach(option => {
+                option.addEventListener('change', function() {
+                    const paymentDetails = document.getElementById('payment-details');
+                    if (this.value === 'cash') {
+                        paymentDetails.style.display = 'none';
+                    } else {
+                        paymentDetails.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Payment form submission
+            paymentForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                processPayment();
+            });
+        }
+
+        // Show payment modal
+        function showPaymentModal() {
+            const total = calculateCartTotal();
+            const itemsCount = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            orderSummary.innerHTML = `
+                <h4>Order Summary</h4>
+                <div class="order-summary-item">
+                    <span>Items (${itemsCount})</span>
+                    <span>${total} Birr</span>
+                </div>
+                <div class="order-summary-item">
+                    <span>Shipping</span>
+                    <span>50 Birr</span>
+                </div>
+                <div class="order-summary-item">
+                    <span>Total</span>
+                    <span>${total + 50} Birr</span>
+                </div>
+            `;
+            
+            paymentModal.classList.add('active');
+            cartOverlay.classList.remove('active');
+        }
+
+        // Show order history
+        function showOrderHistory() {
+            if (!userManager.isLoggedIn()) {
+                showNotification('Please login to view your orders', 'error');
+                showLoginPage();
+                return;
+            }
+            
+            const userOrders = userManager.getUserOrders(userManager.currentUser.id);
+            
+            if (userOrders.length === 0) {
+                ordersContainer.innerHTML = '';
+                ordersContainer.appendChild(emptyOrders);
+                emptyOrders.style.display = 'block';
+            } else {
+                renderOrderHistory(userOrders);
+            }
+            
+            ordersModal.classList.add('active');
+        }
+
+        // Render order history
+        function renderOrderHistory(orders) {
+            ordersContainer.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderDate = new Date(order.createdAt);
+                const formattedDate = orderDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+                
+                const statusClass = userManager.getOrderStatusClass(order.status);
+                const paymentMethod = userManager.getPaymentMethodName(order.paymentMethod);
+                
+                const orderCard = document.createElement('div');
+                orderCard.className = 'order-card';
+                orderCard.innerHTML = `
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #${order.orderNumber}</div>
+                            <div class="order-date">${formattedDate}</div>
+                        </div>
+                        <div class="order-status ${statusClass}">${order.status.toUpperCase()}</div>
+                    </div>
+                    <div class="order-body">
+                        <div class="order-items">
+                            ${order.items.map(item => `
+                                <div class="order-item">
+                                    <div class="order-item-img">
+                                        <img src="${item.image}" alt="${item.title}">
+                                    </div>
+                                    <div class="order-item-details">
+                                        <div class="order-item-title">${item.title}</div>
+                                        <div class="order-item-price">${item.quantity} × ${item.price} Birr = ${item.quantity * item.price} Birr</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-summary-details">
+                            <div class="order-summary-row">
+                                <span>Subtotal:</span>
+                                <span>${order.total} Birr</span>
+                            </div>
+                            <div class="order-summary-row">
+                                <span>Shipping:</span>
+                                <span>50 Birr</span>
+                            </div>
+                            <div class="order-summary-row">
+                                <span>Payment Method:</span>
+                                <span>${paymentMethod}</span>
+                            </div>
+                            ${order.deliveryNotes ? `
+                            <div class="order-summary-row">
+                                <span>Delivery Notes:</span>
+                                <span>${order.deliveryNotes}</span>
+                            </div>
+                            ` : ''}
+                            <div class="order-summary-row total">
+                                <span>Total:</span>
+                                <span>${order.total + 50} Birr</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                ordersContainer.appendChild(orderCard);
+            });
+        }
+
+        // Process payment
+        function processPayment() {
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            const deliveryNotes = document.getElementById('delivery-notes').value;
+            
+            const result = userManager.createOrder(cart, paymentMethod, deliveryNotes);
+            
+            if (result.success) {
+                showNotification(`Order placed successfully! Order #${result.order.orderNumber}`, 'success');
+                
+                cart = [];
+                saveCart();
+                updateCartUI();
+                
+                paymentModal.classList.remove('active');
+                cartOverlay.classList.remove('active');
+                
+                paymentForm.reset();
+                document.getElementById('payment-details').style.display = 'none';
+                
+                if (ordersModal.classList.contains('active')) {
+                    showOrderHistory();
+                }
+            } else {
+                showNotification(result.message, 'error');
+            }
+        }
+
+        // Add item to cart
+        function addToCart(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (!book) return;
+            
+            const existingItem = cart.find(item => item.id === bookId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: book.id,
+                    title: book.title,
+                    price: book.price,
+                    image: book.image,
+                    quantity: 1
+                });
+            }
+            
+            saveCart();
+            updateCartUI();
+            
+            showNotification(`"${book.title}" added to cart!`, 'success');
+            
+            if (window.innerWidth < 768) {
+                cartOverlay.classList.add('active');
+            }
+        }
+
+        // Load user's cart
+        function loadUserCart() {
+            const userId = userManager.currentUser?.id || 'guest';
+            cart = JSON.parse(localStorage.getItem(`cart_${userId}`)) || [];
+            updateCartUI();
+        }
+
+        // Save cart
+        function saveCart() {
+            const userId = userManager.currentUser?.id || 'guest';
+            localStorage.setItem(`cart_${userId}`, JSON.stringify(cart));
+        }
+
+        // View book details
+        function viewBookDetails(bookId) {
+            const book = books.find(b => b.id === bookId);
+            if (!book) return;
+            
+            showNotification(`"${book.title}" by ${book.author}. Price: ${book.price} Birr`, 'info');
+        }
+
+        // Update cart UI
+        function updateCartUI() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            renderCartItems();
+            
+            const total = calculateCartTotal();
+            cartTotal.textContent = `${total} Birr`;
+            
+            if (cart.length === 0) {
+                emptyCart.style.display = 'flex';
+                checkoutBtn.disabled = true;
+            } else {
+                emptyCart.style.display = 'none';
+                checkoutBtn.disabled = false;
+            }
+        }
+
+        // Render cart items
+        function renderCartItems() {
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.appendChild(emptyCart);
+                emptyCart.style.display = 'flex';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-img">
+                        <img src="${item.image}" alt="${item.title}">
+                    </div>
+                    <div class="cart-item-info">
+                        <h4 class="cart-item-title">${item.title}</h4>
+                        <p class="cart-item-price">${item.price} Birr</p>
+                        <div class="cart-item-actions">
+                            <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                            <button class="remove-item" data-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            document.querySelectorAll('.quantity-btn.decrease').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = parseInt(this.getAttribute('data-id'));
+                    updateCartItemQuantity(bookId, -1);
+                });
+            });
+            
+            document.querySelectorAll('.quantity-btn.increase').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = parseInt(this.getAttribute('data-id'));
+                    updateCartItemQuantity(bookId, 1);
+                });
+            });
+            
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookId = parseInt(this.getAttribute('data-id'));
+                    removeFromCart(bookId);
+                });
+            });
+        }
+
+        // Update cart item quantity
+        function updateCartItemQuantity(bookId, change) {
+            const item = cart.find(item => item.id === bookId);
+            if (!item) return;
+            
+            item.quantity += change;
+            
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== bookId);
+                showNotification('Item removed from cart', 'info');
+            }
+            
+            saveCart();
+            updateCartUI();
+        }
+
+        // Remove item from cart
+        function removeFromCart(bookId) {
+            const item = cart.find(item => item.id === bookId);
+            if (!item) return;
+            
+            cart = cart.filter(item => item.id !== bookId);
+            
+            saveCart();
+            updateCartUI();
+            
+            showNotification('Item removed from cart', 'info');
+        }
+
+        // Calculate cart total
+        function calculateCartTotal() {
+            return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    notification.remove();
+                }, 300);
+            }, 3000);
+        }
+        
+    </script>
+<script>
+document.getElementById("userForm").addEventListener("submit", function(e) {
+    e.preventDefault(); // prevent form from refreshing the page
+
+    // Get values from the form inputs
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    const phone = document.getElementById("phone").value;
+    const address = document.getElementById("address").value;
+    const role = document.getElementById("role").value;
+  
+    fetch("http://localhost:5000/api/users", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, phone, address, role })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert(data.message);  // show success message
+        document.getElementById("userForm").reset(); // reset form
+    })
+    .catch(err => console.error(err));
+});
+</script>
+<form id="userForm">
+    <input type="text" id="name" placeholder="Name" required />
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <input type="text" id="phone" placeholder="Phone" />
+    <input type="text" id="address" placeholder="Address" />
+    <select id="role">
+        <option value="customer">Customer</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button type="submit">Add User</button>
+</form>
+
+    
+</body>
+</html>
