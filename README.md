@@ -4,14 +4,7 @@ Lalibela Books is an online bookstore designed to showcase Ethiopian and African
 The platform includes historical works, ancient Geʽez manuscripts, fiction, and contemporary writing.  
 Users can browse books, view details, create an account, log in, and purchase books through the website.
 
----
-
-## 🎯 Project Overview
-This project was developed as a group assignment to practice front-end web development skills by building a functional and user-friendly online bookstore.
-
----
-
-## ✨ Features
+# ✨ Features
 - 📖 Browse a curated collection of books  
 - 🗂️ View detailed book information:
   - Title  
@@ -47,15 +40,5 @@ This project was developed as a group assignment to practice front-end web devel
 - `script.js` – JavaScript logic (books, login, buying)  
 - `image/` – Book images and assets  
 
----
-
-## 👥 Group Members
-- Yabsra Temtim – RMD2525  
-- Rediet Banteyirga – RMD2057  
-- Blen Teshome – RMD622  
-- Eskedar Nigussie – RMD882  
-- Kalkidan Tsehaye – RMD1418  
-
----
 
 ✨ **Happy Reading!**
