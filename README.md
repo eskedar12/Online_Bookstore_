@@ -40,5 +40,3 @@ Users can browse books, view details, create an account, log in, and purchase bo
 - `script.js` – JavaScript logic (books, login, buying)  
 - `image/` – Book images and assets  
 
-
-✨ **Happy Reading!**
