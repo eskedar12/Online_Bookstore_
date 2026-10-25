@@ -1,4 +1,4 @@
-# 📚 Lalibela Books – Online Bookstore
+# Lalibela Books – Online Bookstore
 
 Lalibela Books is an online bookstore designed to showcase Ethiopian and African literature.  
 The platform includes historical works, ancient Geʽez manuscripts, fiction, and contemporary writing.  
