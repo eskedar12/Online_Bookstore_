@@ -25,14 +25,13 @@ Users can browse books, view details, create an account, log in, and purchase bo
 
 ---
 
-## 🚀 How to Use
+## How to Use
 1. Clone the project repository  
 2. Open the project folder  
 3. Open `index.html` in your browser  
 4. Log in using the login page  
 5. Browse books and purchase available items  
 
----
 
 ## 📁 Project Structure
 - `index.html` – Main bookstore page  
