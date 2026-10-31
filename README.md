@@ -32,7 +32,7 @@ Users can browse books, view details, create an account, log in, and purchase bo
 4. Log in using the login page  
 5. Browse books and purchase available items  
 
-## 📁 Project Structure
+## Project Structure
 - `index.html` – Main bookstore page  
 - `style.css` – Website styling  
 - `script.js` – JavaScript logic (books, login, buying)  
