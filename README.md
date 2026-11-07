@@ -5,8 +5,8 @@ The platform includes historical works, ancient Geʽez manuscripts, fiction, and
 Users can browse books, view details, create an account, log in, and purchase books through the website.
 
 #  Features
-- 📖 Browse a curated collection of books  
-- 🗂️ View detailed book information:
+-  Browse a curated collection of books  
+-  View detailed book information:
   - Title  
   - Author  
   - Price  
