@@ -11,10 +11,10 @@ Users can browse books, view details, create an account, log in, and purchase bo
   - Author  
   - Price  
   - Description  
-- 🛒 Buy books through the bookstore interface  
-- 🔐 User login page for authentication  
-- 🆔 Each book has a unique ID  
-- Clean and responsive user interface  
+-  Buy books through the bookstore interface  
+-  User login page for authentication  
+-  Each book has a unique ID  
+-  Clean and responsive user interface  
 
 ---
 
