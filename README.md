@@ -14,7 +14,7 @@ Users can browse books, view details, create an account, log in, and purchase bo
 - 🛒 Buy books through the bookstore interface  
 - 🔐 User login page for authentication  
 - 🆔 Each book has a unique ID  
-- 🎨 Clean and responsive user interface  
+- Clean and responsive user interface  
 
 ---
 
