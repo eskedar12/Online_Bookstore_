@@ -18,7 +18,7 @@ Users can browse books, view details, create an account, log in, and purchase bo
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **HTML** – Structure of the web pages  
 - **CSS3** – Styling and responsive layout  
 - **JavaScript** – Interactivity, login logic, and book handling  
