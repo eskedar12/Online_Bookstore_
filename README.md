@@ -36,5 +36,4 @@ Users can browse books, view details, create an account, log in, and purchase bo
 - `index.html` – Main bookstore page  
 - `style.css` – Website styling  
 - `script.js` – JavaScript logic
-- `image/` – Book images and assets  
 
