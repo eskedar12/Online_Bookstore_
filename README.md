@@ -16,8 +16,6 @@ Users can browse books, view details, create an account, log in, and purchase bo
 -  Each book has a unique ID  
 -  Clean and responsive user interface  
 
----
-
 ## Tech Stack
 - **HTML** – Structure of the web pages  
 - **CSS3** – Styling and responsive layout  
